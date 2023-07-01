@@ -47,7 +47,7 @@ public class FilmQueryApp {
 				int searchByFilmId = input.nextInt();
 				input.nextLine();
 				Film film = db.findFilmById(searchByFilmId);
-				
+
 				if (searchByFilmId < 0 || searchByFilmId > 1000) {
 					System.err.println("Sorry that movie has been TERMINATED, please select again\n");
 				} else {
@@ -56,10 +56,25 @@ public class FilmQueryApp {
 							+ " Description of Film: " + film.getDescription() + "\n");
 				}
 			} else if (userChoice == 2) {
-				
+				System.out.println("Please enter in the keyword that you wish to seach by: ");
+				String searchByKeyword = input.next();
+				List<Film> film = db.findFilmsByKeyword(searchByKeyword);
+
+				for (Film film2 : film) {
+					if (searchByKeyword.contains(film2.getTitle())
+							|| searchByKeyword.contains(film2.getDescription())) {
+
+						System.err.println("Sorry that movie has been TERMINATED, please select again\n");
+					} else {
+						System.out.println("That Film's title is: " + film2.getTitle() + " It was released in: "
+								+ film2.getReleaseYear() + " The Film was rated: " + film2.getRating()
+								+ " Description of Film: " + film2.getDescription() + "\n");
+					}
+				}
 
 			} else if (userChoice == 3) {
-				System.out.println("GoodBye! Thanks for visiting your local Redbox please stop by again sometime and dont forget about us like you did Blockbuster");
+				System.out.println(
+						"GoodBye! Thanks for visiting your local Redbox please stop by again sometime and dont forget about us like you did Blockbuster");
 				running = false;
 			}
 		}
